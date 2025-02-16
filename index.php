@@ -1,5 +1,9 @@
 <?php
-$botNumber = rand(1, 100);
+session_start();
+if (!isset($_SESSION['botNumber'])) {
+    $_SESSION['botNumber'] = rand(1,100);
+}
+$botNumber = $_SESSION['botNumber'];
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = "Too high";
         } else {
             $message = "You got it ;)";
-            $botNumber = rand(1, 100);
+            $_SESSION['botNumber'] = rand(1, 100);
         }
     }
 }
