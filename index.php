@@ -5,11 +5,14 @@ if (!isset($_SESSION['botNumber'])) {
 }
 $botNumber = $_SESSION['botNumber'];
 $message = "";
-
+//создаётся сессия, чтобы хранить значение при попытках пользователя
+//проверяется существование в сессии переменной, если нет то генерируется число
+//и сохраняется в переменную, создаём переменную для хранения сообщения
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userNumber = ($_POST['user_number']);
     if ($userNumber < 1 || $userNumber > 100) {
         $message = "Please, choose a number from 1 to 100";
+//проверяется допустимое ли значение было введено, если нет то выводим сообщение об ошибке
     } else {
         if ($userNumber < $botNumber) {
             $message = "Too low";
@@ -20,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['botNumber'] = rand(1, 100);
         }
     }
+//прописываем условия игры с соотвествующими сообщениями
 }
 ?>
 
